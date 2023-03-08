@@ -141,7 +141,7 @@ class _ListaPokemonState extends State<ListaPokemon> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
-                                    Radius.circular(20),
+                                    Radius.circular(18),
                                   ),
                                   color: Colors.black.withOpacity(0.5),
                                 ),
@@ -181,6 +181,18 @@ class _ListaPokemonState extends State<ListaPokemon> {
                                         blurRadius: 15),
                                   ],
                                 ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 15,
+                              right: 15,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.star_border_rounded,
+                                  size: 32,
+                                  color: Colors.amber,
+                                ),
+                                onPressed: () {},
                               ),
                             ),
                           ],
