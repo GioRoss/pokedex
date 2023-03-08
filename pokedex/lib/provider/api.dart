@@ -30,7 +30,7 @@ Future<List<Map<String, dynamic>>> fetchPokemon() async {
   // }
 
   final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=500'));
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=10'));
 
   try {
     final decodedJson = json.decode(response.body);

@@ -38,109 +38,12 @@ class _HomePageState extends State<HomePage> {
             coloreIcona: Colors.red,
           ),
           CardHomePage(
-              colore1: Theme.of(context).colorScheme.primary,
-              colore2: Theme.of(context).colorScheme.primary,
-              rotta: ListaPokemon.routeName,
-              testo: 'preferiti',
-              icona: Icons.stars),
-          // InkWell(
-          //   splashColor: Theme.of(context).primaryColor,
-          //   borderRadius: BorderRadius.circular(15),
-          //   onTap: () =>
-          //       Navigator.of(context).pushNamed(ListaPokemon.routeName),
-          //   child: Container(
-          //     padding: const EdgeInsets.all(15),
-          //     decoration: BoxDecoration(
-          //       gradient: LinearGradient(
-          //         colors: [
-          //           Theme.of(context).primaryColor.withOpacity(0.7),
-          //           Theme.of(context).primaryColor
-          //         ],
-          //         begin: Alignment.topLeft,
-          //         end: Alignment.bottomRight,
-          //       ),
-          //       borderRadius: BorderRadius.circular(15),
-          //     ),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         const Text(
-          //           'POKEMON',
-          //           style: TextStyle(fontWeight: FontWeight.bold),
-          //         ),
-          //         Image.asset(
-          //           '../assets/images/123456.png',
-          //           width: 20,
-          //           height: 20,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // InkWell(
-          //   splashColor: Theme.of(context).primaryColor,
-          //   borderRadius: BorderRadius.circular(15),
-          //   onTap: () {},
-          //   child: Container(
-          //     padding: const EdgeInsets.all(15),
-          //     decoration: BoxDecoration(
-          //       gradient: LinearGradient(
-          //         colors: [
-          //           Theme.of(context).colorScheme.secondary.withOpacity(0.7),
-          //           Theme.of(context).colorScheme.secondary
-          //         ],
-          //         begin: Alignment.topLeft,
-          //         end: Alignment.bottomRight,
-          //       ),
-          //       borderRadius: BorderRadius.circular(15),
-          //     ),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: const [
-          //         Text(
-          //           'LA MIA SQUADRA',
-          //           style: TextStyle(fontWeight: FontWeight.bold),
-          //         ),
-          //         Icon(
-          //           Icons.favorite,
-          //           color: Colors.red,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          //       InkWell(
-          //         splashColor: Theme.of(context).primaryColor,
-          //         borderRadius: BorderRadius.circular(15),
-          //         onTap: () {},
-          //         child: Container(
-          //           padding: const EdgeInsets.all(15),
-          //           decoration: BoxDecoration(
-          //             gradient: LinearGradient(
-          //               colors: [
-          //                 Theme.of(context).colorScheme.primary.withOpacity(0.7),
-          //                 Theme.of(context).colorScheme.primary
-          //               ],
-          //               begin: Alignment.topLeft,
-          //               end: Alignment.bottomRight,
-          //             ),
-          //             borderRadius: BorderRadius.circular(15),
-          //           ),
-          //           child: Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             crossAxisAlignment: CrossAxisAlignment.center,
-          //             children: const [
-          //               Text(
-          //                 'PREFERITI',
-          //                 style: TextStyle(fontWeight: FontWeight.bold),
-          //               ),
-          //               Icon(Icons.stars),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
+            colore1: Theme.of(context).colorScheme.primary,
+            colore2: Theme.of(context).colorScheme.primary,
+            rotta: ListaPokemon.routeName,
+            testo: 'preferiti',
+            icona: Icons.stars,
+          ),
         ],
       ),
     );
