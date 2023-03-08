@@ -1,80 +1,45 @@
-// import 'package:animalcrossingpedia/provider/api.dart';
 import 'package:flutter/material.dart';
-import 'provider/api.dart' as api;
+import 'package:pokedex/screens/lista_pokemon_screens.dart';
+
+import 'screens/home_page.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pokemon',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.red,
         colorScheme: Theme.of(context).colorScheme.copyWith(
             primary: Colors.amber,
-            secondary: Colors.red.shade600,
-            tertiary: Colors.brown.shade300),
+            secondary: Colors.grey.shade300,
+            tertiary: Colors.blue.shade200),
       ),
-      home: PokemonApp(),
+      home: _PokemonApp(),
+      routes: {
+        ListaPokemon.routeName: (ctx) => ListaPokemon(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PokemonApp extends StatefulWidget {
+class _PokemonApp extends StatefulWidget {
   @override
-  _PokemonApp createState() => _PokemonApp();
+  PokemonApp createState() => PokemonApp();
 }
 
-class _PokemonApp extends State<PokemonApp> {
-  List<dynamic> pokemon = [];
-
-  @override
-  void initState() {
-    super.initState();
-    loadPokemon();
-  }
-
-  Future<void> loadPokemon() async {
-    // try-catch per l'ottenimento delle carte dalla chiamata api
-    try {
-      final List<dynamic> listPokemon = await api.fetchPokemon();
-      setState(() {
-        pokemon = listPokemon;
-      });
-    } catch (e) {
-      // Handle error
-      print(e.toString());
-    }
-  }
-
+class PokemonApp extends State<_PokemonApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokemon'),
       ),
-      body: Container(
-        color: Colors.amber,
-        child: ListView.builder(
-          itemCount: pokemon.length,
-          itemBuilder: (ctx, i) {
-            return Column(
-              children: [
-                Image.network(
-                  pokemon[i]['img_icona'],
-                ),
-                Image.network(
-                  pokemon[i]['img_profilo'],
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+      drawer: const Drawer(),
+      body: HomePage(),
     );
   }
 }

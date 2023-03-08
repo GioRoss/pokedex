@@ -40,7 +40,7 @@ Future<List<Map<String, dynamic>>> fetchPokemon() async {
       final pokemonResponse = await http.get(Uri.parse(pokemon['url']));
       final pokemonJson = json.decode(pokemonResponse.body);
       pokemonList.add({
-        'name': pokemonJson['name'],
+        'nome': pokemonJson['name'],
         'esperienza_base': pokemonJson['base_experience'],
         'abilita':
             pokemonJson['abilities'].map((e) => e['ability']['name']).toList(),
