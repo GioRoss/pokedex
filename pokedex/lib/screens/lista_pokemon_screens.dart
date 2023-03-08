@@ -78,6 +78,10 @@ class _ListaPokemonState extends State<ListaPokemon> {
     return color;
   }
 
+  String capitalize(String cap) {
+    return cap[0].toUpperCase() + cap.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,30 +142,36 @@ class _ListaPokemonState extends State<ListaPokemon> {
                             Positioned(
                               top: 55,
                               left: 15,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(18),
-                                  ),
-                                  color: Colors.black.withOpacity(0.5),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10, top: 5, bottom: 5),
-                                  child: Text(
-                                    pokemon[index]['tipo'][0],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      shadows: [
-                                        BoxShadow(
-                                            color: Colors.blueGrey,
-                                            offset: Offset(0, 0),
-                                            spreadRadius: 1.0,
-                                            blurRadius: 15),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                              child: Wrap(
+                                spacing: 5,
+                                children: [
+                                  ...pokemon[index]['tipo']
+                                      .map(
+                                        (tipo) => Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                          child: Text(
+                                            capitalize(tipo),
+                                            style: const TextStyle(
+                                              shadows: [
+                                                BoxShadow(
+                                                    color: Colors.blueGrey,
+                                                    offset: Offset(0, 0),
+                                                    spreadRadius: 1.0,
+                                                    blurRadius: 15),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ],
                               ),
                             ),
                             Positioned(
