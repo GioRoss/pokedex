@@ -159,6 +159,7 @@ class _ListaPokemonState extends State<ListaPokemon> {
                                           child: Text(
                                             capitalize(tipo),
                                             style: const TextStyle(
+                                              color: Colors.white,
                                               shadows: [
                                                 BoxShadow(
                                                     color: Colors.blueGrey,
@@ -197,11 +198,12 @@ class _ListaPokemonState extends State<ListaPokemon> {
                               top: 15,
                               right: 15,
                               child: IconButton(
-                                icon: const Icon(
-                                  Icons.star_border_rounded,
-                                  size: 32,
-                                  color: Colors.amber,
-                                ),
+                                icon: Icon(Icons.star_border_rounded,
+                                    size: 32,
+                                    color:
+                                        pokemon[index]['tipo'][0] != 'electric'
+                                            ? Colors.amber
+                                            : Colors.black),
                                 onPressed: () {},
                               ),
                             ),

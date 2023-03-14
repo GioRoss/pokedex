@@ -1,36 +1,12 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<List<Map<String, dynamic>>> fetchPokemon() async {
   final List<Map<String, dynamic>> pokemonList = [];
 
-  // String _getColorFromType(String type) {
-  //   String type = '';
-
-  //   switch (type) {
-  //     case 'grass':
-  //       type = 'green';
-  //       break;
-  //     case 'electric':
-  //       type = 'yellow';
-  //       break;
-  //     case 'fire':
-  //       type = 'red';
-  //       break;
-  //     case 'normal':
-  //       type = 'grey';
-  //       break;
-  //     default:
-  //       type = 'none';
-  //       break;
-  //   }
-
-  //   return type;
-  // }
-
   final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=10'));
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'));
 
   try {
     final decodedJson = json.decode(response.body);
