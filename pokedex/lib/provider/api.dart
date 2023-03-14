@@ -5,8 +5,9 @@ import 'dart:convert';
 Future<List<Map<String, dynamic>>> fetchPokemon() async {
   final List<Map<String, dynamic>> pokemonList = [];
 
-  final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'));
+  final response = await http.get(
+    Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'),
+  );
 
   try {
     final decodedJson = json.decode(response.body);
@@ -22,14 +23,12 @@ Future<List<Map<String, dynamic>>> fetchPokemon() async {
             pokemonJson['abilities'].map((e) => e['ability']['name']).toList(),
         'altezza': pokemonJson['height'],
         'id': pokemonJson['id'],
-        'mosse': pokemonJson['moves']
-            .map((e) => e['move']['name'])
-            .take(10)
-            .toList(),
-        'apparizione_giochi': pokemonJson['game_indices']
-            .map((e) => e['version']['name'])
-            .take(5)
-            .toList(),
+        'mosse':
+            pokemonJson['moves'].map((e) => e['move']['name']).take(5).toList(),
+        // 'apparizione_giochi': pokemonJson['game_indices']
+        //     .map((e) => e['version']['name'])
+        //     .take(5)
+        //     .toList(),
         'img_icona': pokemonJson['sprites']['front_default'],
         'img_icona_shiny': pokemonJson['sprites']['front_shiny'],
         'img_profilo': pokemonJson['sprites']['other']['home']['front_default'],
@@ -43,7 +42,6 @@ Future<List<Map<String, dynamic>>> fetchPokemon() async {
     // print(pokemonList);
     return pokemonList;
   } catch (e) {
-    // inserito l'ignore qui sotto per evitare il warning della funzione print()
     // ignore: avoid_print
     print(e.toString());
     return [];

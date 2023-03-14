@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/screens/lista_pokemon_screens.dart';
+import 'package:pokedex/screens/scheda_pokemon.dart';
 
 import 'screens/home_page.dart';
 
@@ -11,15 +12,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokemon',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.amber,
         colorScheme: Theme.of(context).colorScheme.copyWith(
-            primary: Colors.amber,
+            primary: Colors.red,
             secondary: Colors.grey.shade300,
             tertiary: Colors.blue.shade200),
       ),
       home: _PokemonApp(),
       routes: {
         ListaPokemon.routeName: (ctx) => ListaPokemon(),
+        SchedaPokemon.routeName: (ctx) => SchedaPokemon(),
       },
       debugShowCheckedModeBanner: false,
     );
@@ -36,7 +38,16 @@ class PokemonApp extends State<_PokemonApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pokemon'),
+        flexibleSpace: FlexibleSpaceBar(
+          background: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/pokemonLogo.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
       ),
       drawer: const Drawer(),
       body: HomePage(),

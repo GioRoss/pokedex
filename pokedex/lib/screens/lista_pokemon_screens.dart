@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/screens/scheda_pokemon.dart';
 import '../provider/api.dart' as api;
 
 class ListaPokemon extends StatefulWidget {
   static const routeName = '/lista-pokemon';
 
   @override
-  State<ListaPokemon> createState() => _ListaPokemonState();
+  State<ListaPokemon> createState() => ListaPokemonState();
 }
 
-class _ListaPokemonState extends State<ListaPokemon> {
+class ListaPokemonState extends State<ListaPokemon> {
   List<dynamic> pokemon = [];
 
   @override
@@ -78,12 +79,42 @@ class _ListaPokemonState extends State<ListaPokemon> {
     return color;
   }
 
+  List<Widget> getPokemonType(List<dynamic> tipo) {
+    return tipo
+        .map(
+          (ele) => Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: Colors.black.withOpacity(0.5),
+            ),
+            child: Text(
+              capitalize(ele),
+              style: const TextStyle(
+                color: Colors.white,
+                shadows: [
+                  BoxShadow(
+                      color: Colors.blueGrey,
+                      offset: Offset(0, 0),
+                      spreadRadius: 1.0,
+                      blurRadius: 15),
+                ],
+              ),
+            ),
+          ),
+        )
+        .toList();
+  }
+
   String capitalize(String cap) {
     return cap[0].toUpperCase() + cap.substring(1);
   }
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('LISTA POKEMON'),
@@ -97,14 +128,30 @@ class _ListaPokemonState extends State<ListaPokemon> {
                 crossAxisCount: 2,
               ),
               shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
+              physics:
+                  const BouncingScrollPhysics(), // usato per far rimbalzare lo scorrimento al raggiungimento della fine
               itemCount: pokemon.length,
               itemBuilder: (ctx, index) {
                 return Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamed(
+                      SchedaPokemon.routeName,
+                      arguments: {
+                        'nome': pokemon[index]['nome'].toUpperCase(),
+                        'colore': _getPokemonTypeColor(pokemon[index]['tipo']),
+                        'tipo': pokemon[index]['tipo'],
+                        'id': pokemon[index]['id'],
+                        'img': pokemon[index]['img_profilo'],
+                        'esperienza': pokemon[index]['esperienza_base'],
+                        'abilita': pokemon[index]['abilita'],
+                        'altezza': pokemon[index]['altezza'],
+                        'mosse': pokemon[index]['mosse'],
+                        'peso': pokemon[index]['peso'],
+                      },
+                    ),
+                    // usato per l'interfaccia del telefono, per evitare che ci siano blocchi di interfaccia
                     child: SafeArea(
                       child: Container(
                         decoration: BoxDecoration(
@@ -133,56 +180,39 @@ class _ListaPokemonState extends State<ListaPokemon> {
                                   pokemon[index]['img_profilo'],
                                   height: 100,
                                   fit: BoxFit.fitHeight,
-                                  // placeholder: (context, url) => Center(
-                                  //   child: CircularProgressIndicator(),
-                                  // ),
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
                             Positioned(
                               top: 55,
-                              left: 15,
+                              left: 10,
+                              // utilizzato per avere un layout flessibile
                               child: Wrap(
+                                direction: Axis.vertical,
                                 spacing: 5,
-                                children: [
-                                  ...pokemon[index]['tipo']
-                                      .map(
-                                        (tipo) => Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(18),
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                          ),
-                                          child: Text(
-                                            capitalize(tipo),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              shadows: [
-                                                BoxShadow(
-                                                    color: Colors.blueGrey,
-                                                    offset: Offset(0, 0),
-                                                    spreadRadius: 1.0,
-                                                    blurRadius: 15),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
+                                children: <Widget>[
+                                  ...getPokemonType(pokemon[index]['tipo']),
                                 ],
                               ),
                             ),
                             Positioned(
-                              top: 28,
-                              left: 15,
+                              top: 20,
+                              left: 10,
                               child: Text(
-                                pokemon[index]['nome'].toUpperCase(),
+                                "#${pokemon[index]['id']} ${capitalize(pokemon[index]['nome'])}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Colors.white,
                                   shadows: [
                                     BoxShadow(
@@ -195,11 +225,11 @@ class _ListaPokemonState extends State<ListaPokemon> {
                               ),
                             ),
                             Positioned(
-                              top: 15,
-                              right: 15,
+                              // top: 5,
+                              right: -2,
                               child: IconButton(
                                 icon: Icon(Icons.star_border_rounded,
-                                    size: 32,
+                                    size: 25,
                                     color:
                                         pokemon[index]['tipo'][0] != 'electric'
                                             ? Colors.amber
