@@ -8,7 +8,7 @@ class CardHomePage extends StatelessWidget {
   final IconData icona;
   final Color? coloreIcona;
 
-  CardHomePage(
+  const CardHomePage(
       {required this.colore1,
       required this.colore2,
       required this.rotta,

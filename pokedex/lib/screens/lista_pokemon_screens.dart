@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/screens/scheda_pokemon.dart';
-import '../provider/api.dart' as api;
+import '../provider/pokedex.dart';
 
 class ListaPokemon extends StatefulWidget {
   static const routeName = '/lista-pokemon';
+  final elemento = Pokedex();
 
   @override
   State<ListaPokemon> createState() => ListaPokemonState();
@@ -20,7 +21,7 @@ class ListaPokemonState extends State<ListaPokemon> {
 
   Future<void> loadPokemon() async {
     try {
-      final List<dynamic> listPokemon = await api.fetchPokemon();
+      final List<dynamic> listPokemon = await widget.elemento.fetchPokemon();
       setState(() {
         pokemon = listPokemon;
       });
@@ -139,23 +140,23 @@ class ListaPokemonState extends State<ListaPokemon> {
                     onTap: () => Navigator.of(context).pushNamed(
                       SchedaPokemon.routeName,
                       arguments: {
-                        'nome': pokemon[index]['nome'].toUpperCase(),
-                        'colore': _getPokemonTypeColor(pokemon[index]['tipo']),
-                        'tipo': pokemon[index]['tipo'],
-                        'id': pokemon[index]['id'],
-                        'img': pokemon[index]['img_profilo'],
-                        'esperienza': pokemon[index]['esperienza_base'],
-                        'abilita': pokemon[index]['abilita'],
-                        'altezza': pokemon[index]['altezza'],
-                        'mosse': pokemon[index]['mosse'],
-                        'peso': pokemon[index]['peso'],
+                        'nome': pokemon[index].nome.toUpperCase(),
+                        'colore': _getPokemonTypeColor(pokemon[index].tipo),
+                        'tipo': pokemon[index].tipo,
+                        'id': pokemon[index].id,
+                        'img': pokemon[index].imgProfilo,
+                        'esperienza': pokemon[index].esperienzaBase,
+                        'abilita': pokemon[index].abilita,
+                        'altezza': pokemon[index].altezza,
+                        'mosse': pokemon[index].mosse,
+                        'peso': pokemon[index].peso,
                       },
                     ),
                     // usato per l'interfaccia del telefono, per evitare che ci siano blocchi di interfaccia
                     child: SafeArea(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _getPokemonTypeColor(pokemon[index]['tipo']),
+                          color: _getPokemonTypeColor(pokemon[index].tipo),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(25),
                           ),
@@ -177,7 +178,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                               child: Hero(
                                 tag: index,
                                 child: Image.network(
-                                  pokemon[index]['img_profilo'],
+                                  pokemon[index].imgProfilo,
                                   height: 100,
                                   fit: BoxFit.fitHeight,
                                   loadingBuilder: (BuildContext context,
@@ -201,7 +202,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                                 direction: Axis.vertical,
                                 spacing: 5,
                                 children: <Widget>[
-                                  ...getPokemonType(pokemon[index]['tipo']),
+                                  ...getPokemonType(pokemon[index].tipo),
                                 ],
                               ),
                             ),
@@ -209,7 +210,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                               top: 20,
                               left: 10,
                               child: Text(
-                                "#${pokemon[index]['id']} ${capitalize(pokemon[index]['nome'])}",
+                                "#${pokemon[index].id} ${capitalize(pokemon[index].nome)}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -230,10 +231,9 @@ class ListaPokemonState extends State<ListaPokemon> {
                               child: IconButton(
                                 icon: Icon(Icons.star_border_rounded,
                                     size: 25,
-                                    color:
-                                        pokemon[index]['tipo'][0] != 'electric'
-                                            ? Colors.amber
-                                            : Colors.black),
+                                    color: pokemon[index].tipo[0] != 'electric'
+                                        ? Colors.amber
+                                        : Colors.black),
                                 onPressed: () {},
                               ),
                             ),

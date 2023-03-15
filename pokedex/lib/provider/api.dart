@@ -1,49 +1,38 @@
-// import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter/material.dart';
 
-Future<List<Map<String, dynamic>>> fetchPokemon() async {
-  final List<Map<String, dynamic>> pokemonList = [];
+class Pokemon with ChangeNotifier {
+  final String nome;
+  final List<dynamic> tipo;
+  final int id;
+  final String imgProfilo;
+  final String imgIcona;
+  final String imgIconaShiny;
+  final String imgProfiloShiny;
+  final int esperienzaBase;
+  final List<dynamic> abilita;
+  final int altezza;
+  final List<dynamic> mosse;
+  final int peso;
+  bool isFavorite;
 
-  final response = await http.get(
-    Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'),
-  );
+  Pokemon({
+    required this.nome,
+    required this.esperienzaBase,
+    required this.abilita,
+    required this.altezza,
+    required this.id,
+    required this.mosse,
+    required this.imgIcona,
+    required this.imgIconaShiny,
+    required this.imgProfilo,
+    required this.imgProfiloShiny,
+    required this.tipo,
+    required this.peso,
+    this.isFavorite = false,
+  });
 
-  try {
-    final decodedJson = json.decode(response.body);
-    final pokemonResults = decodedJson['results'];
-
-    for (final pokemon in pokemonResults) {
-      final pokemonResponse = await http.get(Uri.parse(pokemon['url']));
-      final pokemonJson = json.decode(pokemonResponse.body);
-      pokemonList.add({
-        'nome': pokemonJson['name'],
-        'esperienza_base': pokemonJson['base_experience'],
-        'abilita':
-            pokemonJson['abilities'].map((e) => e['ability']['name']).toList(),
-        'altezza': pokemonJson['height'],
-        'id': pokemonJson['id'],
-        'mosse':
-            pokemonJson['moves'].map((e) => e['move']['name']).take(5).toList(),
-        // 'apparizione_giochi': pokemonJson['game_indices']
-        //     .map((e) => e['version']['name'])
-        //     .take(5)
-        //     .toList(),
-        'img_icona': pokemonJson['sprites']['front_default'],
-        'img_icona_shiny': pokemonJson['sprites']['front_shiny'],
-        'img_profilo': pokemonJson['sprites']['other']['home']['front_default'],
-        'img_profilo_shiny': pokemonJson['sprites']['other']['home']
-            ['front_shiny'],
-        'tipo': pokemonJson['types'].map((e) => e['type']['name']).toList(),
-        'peso': pokemonJson['weight']
-      });
-    }
-
-    // print(pokemonList);
-    return pokemonList;
-  } catch (e) {
-    // ignore: avoid_print
-    print(e.toString());
-    return [];
+  void toggleFavoriteStatus() {
+    isFavorite = !isFavorite;
+    notifyListeners();
   }
 }

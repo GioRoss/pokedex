@@ -40,7 +40,6 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
     pokemonPeso = routeArgs['peso'];
 
     return Scaffold(
-      // appBar: AppBar(title: const Text('DETTAGLI POKEMON')),
       backgroundColor: pokemonColore,
       body: Stack(
         alignment: Alignment.center,
@@ -224,8 +223,9 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                                               .capitalize(abilita)
                                               .toString(),
                                           style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 17),
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                          ),
                                         ),
                                       )
                                       .toList()
