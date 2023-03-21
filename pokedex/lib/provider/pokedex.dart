@@ -9,19 +9,12 @@ class Pokedex with ChangeNotifier {
   // bool loading = false;
 
   Future<void> fetchPokemon() async {
-    // if (loading) {
-    //   return;
-    // }
-
-    // if (_pokemonList.isNotEmpty) {
-    //   return;
-    // }
-
-    // loading = true;
-    // notifyListeners();
+    if (_pokemonList.isNotEmpty) {
+      return;
+    }
 
     final response = await http.get(
-      Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'),
+      Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=1000'),
     );
 
     print('RICHIESTA HTTP COMPLETATA');
@@ -60,7 +53,6 @@ class Pokedex with ChangeNotifier {
         );
       }
 
-      // loading = false;
       notifyListeners();
     } catch (e) {
       // ignore: avoid_print

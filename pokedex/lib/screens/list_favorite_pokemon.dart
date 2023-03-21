@@ -26,52 +26,79 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
       body: ListView.builder(
         itemCount: listaFavoriti.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Card(
-              elevation: 5,
-              child: SizedBox(
-                height: 65,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.black, width: 0.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor:
-                      favoriti.getPokemonTypeColor(listaFavoriti[index].tipo),
-                  title: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Text(
-                      '#0${listaFavoriti[index].id} ${favoriti.capitalize(listaFavoriti[index].nome)}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+          return Dismissible(
+            key: UniqueKey(),
+            direction: DismissDirection.endToStart,
+            confirmDismiss: (direction) {
+              return showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Sei Sicuro?'),
+                  content:
+                      const Text('Vuoi rimuovere il pokemon dalla squadra?'),
+                  actions: <Widget>[
+                    FloatingActionButton(
+                      child: const Text('NO'),
+                      onPressed: () => Navigator.of(ctx).pop(false),
                     ),
-                  ),
-                  subtitle: Wrap(
-                    spacing: 5,
-                    children: <Widget>[
-                      ...favoriti.getPokemonType(listaFavoriti[index].tipo),
-                    ],
-                  ),
-                  trailing: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('../../assets/images/pokeball.png'),
+                    FloatingActionButton(
+                      child: const Text('SI'),
+                      onPressed: () => Navigator.of(ctx).pop(true),
+                    ),
+                  ],
+                ),
+              );
+            },
+            onDismissed: (direction) =>
+                Provider.of<Pokedex>(context, listen: false)
+                    .toggleFavoriteStatus(listaFavoriti[index].id),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Card(
+                elevation: 5,
+                child: SizedBox(
+                  height: 65,
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.black, width: 0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    tileColor:
+                        favoriti.getPokemonTypeColor(listaFavoriti[index].tipo),
+                    title: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Text(
+                        '#0${listaFavoriti[index].id} ${favoriti.capitalize(listaFavoriti[index].nome)}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    child: Image.network(
-                      listaFavoriti[index].imgIcona,
-                      height: 70,
-                      width: 70,
+                    subtitle: Wrap(
+                      spacing: 5,
+                      children: <Widget>[
+                        ...favoriti.getPokemonType(listaFavoriti[index].tipo),
+                      ],
                     ),
-                  ),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ChangeNotifierProvider.value(
-                          value: listaFavoriti[index],
-                          child: SchedaPokemon(),
-                        );
-                      },
+                    trailing: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('../../assets/images/pokeball.png'),
+                        ),
+                      ),
+                      child: Image.network(
+                        listaFavoriti[index].imgIcona,
+                        height: 70,
+                        width: 70,
+                      ),
+                    ),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ChangeNotifierProvider.value(
+                            value: listaFavoriti[index],
+                            child: SchedaPokemon(),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

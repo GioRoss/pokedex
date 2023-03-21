@@ -26,43 +26,32 @@ class ListaPokemonState extends State<ListaPokemon> {
     super.initState();
   }
 
+  void scaffoldMessengerTeam(String text) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: const Color.fromARGB(193, 0, 0, 0),
+        content: Text(
+          text,
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   void toggleTeam(Pokemon pokemon, Pokedex poke) {
     if (!pokemon.isTeam && poke.pokemonTeamCount < 6) {
       poke.addPokemonTeam(pokemon.id);
-      // print('pokemon aggiunto alla squadra');
-      // showDialog(
-      //   context: context,
-      // builder: (_) => const AlertDialog(
-      //   title: Text('Aggiunto Pokemon Ciccione'),
-      //   elevation: 24.0,
-      //   backgroundColor: Colors.blue,
-      //   // shape: CircleBorder(),
-      //   // content: Text('Accetti?'),
-      //   // actions: [FlatButton('no')],
-      // ),
-      // );
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          Timer(const Duration(seconds: 2), () {
-            Navigator.of(context).pop();
-          });
-          return const AlertDialog(
-            title: Text('Aggiunto Pokemon Ciccione'),
-            elevation: 24.0,
-            backgroundColor: Colors.blue,
-            // shape: CircleBorder(),
-            // content: Text('Accetti?'),
-            // actions: [FlatButton('no')],
-          );
-        },
-        barrierDismissible: true,
-      );
+      scaffoldMessengerTeam(
+          'Aggiunto ${poke.capitalize(pokemon.nome)} alla Squadra!!');
     } else if (pokemon.isTeam) {
       poke.removePokemonTeam(pokemon.id);
-      print('pokemon rimosso dalla squadra, sicuro?');
+      scaffoldMessengerTeam(
+          'Rimosso ${poke.capitalize(pokemon.nome)} dalla Squadra!!');
     } else {
-      print('squadra piena');
+      scaffoldMessengerTeam(
+          'Squadra Piena, Non è stato possibile aggiungere ${poke.capitalize(pokemon.nome)} alla Squadra!');
     }
 
     if (poke.pokemonTeamCount < 6) {
