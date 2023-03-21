@@ -14,6 +14,7 @@ class Pokemon with ChangeNotifier {
   final List<dynamic> mosse;
   final int peso;
   bool isFavorite;
+  bool isTeam;
 
   Pokemon({
     required this.nome,
@@ -28,11 +29,7 @@ class Pokemon with ChangeNotifier {
     required this.imgProfiloShiny,
     required this.tipo,
     required this.peso,
-    this.isFavorite = false,
+    required this.isFavorite,
+    required this.isTeam,
   });
-
-  void toggleFavoriteStatus() {
-    isFavorite = !isFavorite;
-    notifyListeners();
-  }
 }

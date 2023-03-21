@@ -9,7 +9,8 @@ class CardHomePage extends StatelessWidget {
   final Color? coloreIcona;
 
   const CardHomePage(
-      {required this.colore1,
+      {super.key,
+      required this.colore1,
       required this.colore2,
       required this.rotta,
       required this.testo,

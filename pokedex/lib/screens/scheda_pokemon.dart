@@ -1,43 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/pokedex.dart';
+import '../provider/pokemon.dart';
 import 'lista_pokemon_screens.dart';
 
 class SchedaPokemon extends StatefulWidget {
   static const routeName = '/scheda-pokemon';
-  ListaPokemonState listaPokemon = ListaPokemonState();
-
   @override
   State<SchedaPokemon> createState() => _SchedaPokemonState();
 }
 
 class _SchedaPokemonState extends State<SchedaPokemon> {
-  String pokemonNome = "";
-  Color? pokemonColore;
-  List<dynamic> pokemonTipo = [];
-  int? pokemonId;
-  String pokemonImg = "";
-  int pokemonEsperienza = 0;
-  List<dynamic> pokemonAbilita = [];
-  int pokemonAltezza = 0;
-  List<dynamic> pokemonMosse = [];
-  int pokemonPeso = 0;
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    final pokemonData = Provider.of<Pokedex>(context);
+    final pokemon = Provider.of<Pokemon>(context);
 
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    pokemonNome = routeArgs['nome'];
-    pokemonTipo = routeArgs['tipo'];
-    pokemonColore = routeArgs['colore'];
-    pokemonId = routeArgs['id'];
-    pokemonImg = routeArgs['img'];
-    pokemonEsperienza = routeArgs['esperienza'];
-    pokemonAbilita = routeArgs['abilita'];
-    pokemonAltezza = routeArgs['altezza'];
-    pokemonMosse = routeArgs['mosse'];
-    pokemonPeso = routeArgs['peso'];
+    final pokemonNome = pokemon.nome.toUpperCase();
+    final pokemonTipo = pokemon.tipo;
+    final pokemonColore = pokemonData.getPokemonTypeColor(pokemon.tipo);
+    final pokemonId = pokemon.id;
+    final pokemonImg = pokemon.imgProfilo;
+    final pokemonEsperienza = pokemon.esperienzaBase;
+    final pokemonAbilita = pokemon.abilita;
+    final pokemonAltezza = pokemon.altezza;
+    final pokemonMosse = pokemon.mosse;
+    final pokemonPeso = pokemon.peso;
 
     return Scaffold(
       backgroundColor: pokemonColore,
@@ -90,7 +80,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
               direction: Axis.vertical,
               spacing: 5,
               children: [
-                ...widget.listaPokemon.getPokemonType(pokemonTipo),
+                ...pokemonData.getPokemonType(pokemonTipo),
               ],
             ),
           ),
@@ -219,7 +209,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                                   ...pokemonAbilita
                                       .map(
                                         (abilita) => Text(
-                                          widget.listaPokemon
+                                          pokemonData
                                               .capitalize(abilita)
                                               .toString(),
                                           style: const TextStyle(
@@ -256,7 +246,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                                   ...pokemonMosse
                                       .map(
                                         (mossa) => Text(
-                                          widget.listaPokemon
+                                          pokemonData
                                               .capitalize(mossa)
                                               .toString(),
                                           style: const TextStyle(

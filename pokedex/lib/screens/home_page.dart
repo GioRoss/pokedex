@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/screens/card_home_page.dart';
-// import 'package:flutter_icondata/flutter_icondata.dart';
+import 'package:pokedex/screens/list_pokemon_team.dart';
 
+import 'list_favorite_pokemon.dart';
 import 'lista_pokemon_screens.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           CardHomePage(
             colore1: Theme.of(context).colorScheme.secondary,
             colore2: Theme.of(context).colorScheme.secondary,
-            rotta: ListaPokemon.routeName,
+            rotta: ListaPokemonTeam.routeName,
             testo: 'la mia squadra',
             icona: Icons.favorite,
             coloreIcona: Colors.red,
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           CardHomePage(
             colore1: Theme.of(context).colorScheme.primary,
             colore2: Theme.of(context).colorScheme.primary,
-            rotta: ListaPokemon.routeName,
+            rotta: ListaPokemonFavoriti.routeName,
             testo: 'preferiti',
             icona: Icons.stars,
           ),
