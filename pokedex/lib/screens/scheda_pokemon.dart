@@ -4,10 +4,11 @@ import 'package:pokedex/widgets/info_scheda_pokemon_list.dart';
 import 'package:provider/provider.dart';
 import '../provider/pokedex.dart';
 import '../provider/pokemon.dart';
-import 'lista_pokemon_screens.dart';
 
 class SchedaPokemon extends StatefulWidget {
   static const routeName = '/scheda-pokemon';
+
+  const SchedaPokemon({super.key});
   @override
   State<SchedaPokemon> createState() => _SchedaPokemonState();
 }
@@ -15,8 +16,8 @@ class SchedaPokemon extends StatefulWidget {
 class _SchedaPokemonState extends State<SchedaPokemon> {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final pokemonData = Provider.of<Pokedex>(context);
     final pokemon = Provider.of<Pokemon>(context);
 
