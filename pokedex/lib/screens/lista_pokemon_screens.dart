@@ -63,10 +63,17 @@ class ListaPokemonState extends State<ListaPokemon> {
 
   @override
   Widget build(BuildContext context) {
-    // var height = MediaQuery.of(context).size.height;
-    // var width = MediaQuery.of(context).size.width;
+    double scaleFactor = 1.0;
+    final width = MediaQuery.of(context).size.width * scaleFactor;
+    // final height = MediaQuery.of(context).size.height * scaleFactor;
+    final orientation = MediaQuery.of(context).orientation;
+
     final pokemonData = Provider.of<Pokedex>(context);
     final pokemon = pokemonData.pokemonList;
+
+    if (orientation == Orientation.landscape) {
+      scaleFactor = 0.5;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -76,9 +83,15 @@ class ListaPokemonState extends State<ListaPokemon> {
         children: [
           Expanded(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 1.4,
-                crossAxisCount: 2,
+                crossAxisCount: width < 400
+                    ? 1
+                    : width > 1000
+                        ? 4
+                        : width > 800
+                            ? 3
+                            : 2,
               ),
               shrinkWrap: true,
               physics:
@@ -116,7 +129,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                               right: -10,
                               child: Image.asset(
                                 '../../assets/images/pokeball.png',
-                                height: 100,
+                                height: width > 1200 || width < 400 ? 150 : 100,
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
@@ -127,7 +140,8 @@ class ListaPokemonState extends State<ListaPokemon> {
                                 tag: index,
                                 child: Image.network(
                                   pokemon[index].imgProfilo,
-                                  height: 100,
+                                  height:
+                                      width > 1200 || width < 400 ? 150 : 100,
                                   fit: BoxFit.fitHeight,
                                   loadingBuilder: (BuildContext context,
                                       Widget child,
@@ -150,8 +164,8 @@ class ListaPokemonState extends State<ListaPokemon> {
                                 direction: Axis.vertical,
                                 spacing: 5,
                                 children: <Widget>[
-                                  ...pokemonData
-                                      .getPokemonType(pokemon[index].tipo),
+                                  ...pokemonData.getPokemonType(
+                                      pokemon[index].tipo, width),
                                 ],
                               ),
                             ),
@@ -160,11 +174,14 @@ class ListaPokemonState extends State<ListaPokemon> {
                               left: 10,
                               child: Text(
                                 "#${pokemon[index].id} ${pokemonData.capitalize(pokemon[index].nome)}",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: width > 1200 ||
+                                          (width < 400 && width > 270)
+                                      ? 25
+                                      : 20,
                                   color: Colors.white,
-                                  shadows: [
+                                  shadows: const [
                                     BoxShadow(
                                         color: Colors.blueGrey,
                                         offset: Offset(0, 0),
@@ -175,14 +192,14 @@ class ListaPokemonState extends State<ListaPokemon> {
                               ),
                             ),
                             Positioned(
-                              right: -2,
+                              right: width > 1200 ? 5 : -2,
                               child: Consumer<Pokedex>(
                                 builder: (ctx, poke, child) => IconButton(
                                   icon: Icon(
                                       pokemon[index].isFavorite
                                           ? Icons.star_rounded
                                           : Icons.star_border_rounded,
-                                      size: 25,
+                                      size: width > 1200 ? 35 : 25,
                                       color:
                                           pokemon[index].tipo[0] != 'electric'
                                               ? Colors.amber
@@ -196,14 +213,14 @@ class ListaPokemonState extends State<ListaPokemon> {
                               ),
                             ),
                             Positioned(
-                              right: 25,
+                              right: width > 1200 ? 40 : 25,
                               child: Consumer<Pokedex>(
                                 builder: (ctx, poke, child) => IconButton(
                                   icon: Icon(
                                       pokemon[index].isTeam
                                           ? Icons.remove_rounded
                                           : Icons.add_rounded,
-                                      size: 25,
+                                      size: width > 1200 ? 35 : 25,
                                       color:
                                           pokemon[index].tipo[0] != 'electric'
                                               ? Colors.amber

@@ -18,6 +18,8 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
   Widget build(BuildContext context) {
     final favoriti = Provider.of<Pokedex>(context);
     final List<Pokemon> listaFavoriti = favoriti.favoritePokemon;
+    final double scaleFactor = 1.0;
+    final width = MediaQuery.of(context).size.width * scaleFactor;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,8 +36,7 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
                 context: context,
                 builder: (ctx) => AlertDialog(
                   title: const Text('Sei Sicuro?'),
-                  content:
-                      const Text('Vuoi rimuovere il pokemon dalla squadra?'),
+                  content: const Text('Vuoi rimuovere il pokemon dai prefeti?'),
                   actions: <Widget>[
                     FloatingActionButton(
                       child: const Text('NO'),
@@ -51,31 +52,45 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
             },
             onDismissed: (direction) =>
                 Provider.of<Pokedex>(context, listen: false)
-                    .toggleFavoriteStatus(listaFavoriti[index].id),
+                    .toggleFavoriteStatus(
+              listaFavoriti[index].id,
+            ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+              ),
               child: Card(
                 elevation: 5,
                 child: SizedBox(
                   height: 65,
                   child: ListTile(
                     shape: RoundedRectangleBorder(
-                      side: const BorderSide(color: Colors.black, width: 0.5),
-                      borderRadius: BorderRadius.circular(10),
+                      side: const BorderSide(
+                        color: Colors.black,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
                     ),
                     tileColor:
                         favoriti.getPokemonTypeColor(listaFavoriti[index].tipo),
                     title: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                      ),
                       child: Text(
                         '#0${listaFavoriti[index].id} ${favoriti.capitalize(listaFavoriti[index].nome)}',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     subtitle: Wrap(
                       spacing: 5,
                       children: <Widget>[
-                        ...favoriti.getPokemonType(listaFavoriti[index].tipo),
+                        ...favoriti.getPokemonType(
+                            listaFavoriti[index].tipo, 0),
                       ],
                     ),
                     trailing: Container(
@@ -86,8 +101,8 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
                       ),
                       child: Image.network(
                         listaFavoriti[index].imgIcona,
-                        height: 70,
-                        width: 70,
+                        // height: 70,
+                        // width: 70,
                       ),
                     ),
                     onTap: () => Navigator.of(context).push(

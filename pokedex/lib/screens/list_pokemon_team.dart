@@ -18,6 +18,8 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
   Widget build(BuildContext context) {
     final favoriti = Provider.of<Pokedex>(context);
     final List<Pokemon> listaFavoriti = favoriti.pokemonMyTeam;
+    double scaleFactor = 1.0;
+    final width = MediaQuery.of(context).size.width * scaleFactor;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +51,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
                   subtitle: Wrap(
                     spacing: 5,
                     children: <Widget>[
-                      ...favoriti.getPokemonType(listaFavoriti[index].tipo),
+                      ...favoriti.getPokemonType(listaFavoriti[index].tipo, 0),
                     ],
                   ),
                   trailing: Container(

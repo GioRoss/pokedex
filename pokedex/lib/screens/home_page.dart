@@ -13,12 +13,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Container(
       padding: const EdgeInsets.all(10),
       child: GridView(
         padding: const EdgeInsets.all(8.0),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: width > 1700
+              ? 650
+              : width > 1590
+                  ? 550
+                  : width > 1140
+                      ? 500
+                      : width > 990
+                          ? 350
+                          : 300,
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,

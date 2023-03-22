@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/widgets/info_scheda_pokemon.dart';
+import 'package:pokedex/widgets/info_scheda_pokemon_list.dart';
 import 'package:provider/provider.dart';
 import '../provider/pokedex.dart';
 import '../provider/pokemon.dart';
@@ -35,19 +37,19 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 3,
+            top: width > 1200 ? 1 : 3,
             left: 9,
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_circle_left_outlined,
                 color: Colors.white,
-                size: 40,
+                size: width > 1200 ? 45 : 40,
               ),
               onPressed: () => Navigator.pop(context),
             ),
           ),
           Positioned(
-            top: 60,
+            top: width > 1200 ? 55 : 60,
             left: 20,
             right: 20,
             child: Row(
@@ -55,17 +57,17 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
               children: [
                 Text(
                   pokemonNome,
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: width > 1200 ? 40 : 30,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
                 ),
                 Text(
                   "#$pokemonId",
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: width > 1200 ? 40 : 30,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.left,
@@ -74,13 +76,13 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
             ),
           ),
           Positioned(
-            top: 100,
+            top: 105,
             left: 22,
             child: Wrap(
               direction: Axis.vertical,
               spacing: 5,
               children: [
-                ...pokemonData.getPokemonType(pokemonTipo),
+                ...pokemonData.getPokemonType(pokemonTipo, width),
               ],
             ),
           ),
@@ -89,7 +91,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
             right: -30,
             child: Image.asset(
               '../../assets/images/pokeball.png',
-              height: 200,
+              height: width > 1200 ? 250 : 200,
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -99,194 +101,49 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
               width: width,
               height: height * 0.53,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  color: Colors.white),
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20),
+                ),
+                color: Colors.white,
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
                       const SizedBox(height: 30.0),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Nome:',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                pokemonNome,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemon(
+                        width: width,
+                        etichetta: 'Nome: ',
+                        descrizione: pokemonNome,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Altezza: ',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                '${pokemonAltezza.toString()}.0 cm',
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemon(
+                        width: width,
+                        etichetta: 'Altezza: ',
+                        descrizione: '${pokemonAltezza.toString()}.0 cm',
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Peso: ',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                '${pokemonPeso.toString()}.0 gr',
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemon(
+                        width: width,
+                        etichetta: 'Peso: ',
+                        descrizione: '${pokemonPeso.toString()}.0 gr',
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Abilità: ',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ...pokemonAbilita
-                                      .map(
-                                        (abilita) => Text(
-                                          pokemonData
-                                              .capitalize(abilita)
-                                              .toString(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 17,
-                                          ),
-                                        ),
-                                      )
-                                      .toList()
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemonLista(
+                        width: width,
+                        pokemonListInfo: pokemonAbilita,
+                        pokemonData: pokemonData,
+                        etichetta: 'Abilità: ',
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Mosse: ',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ...pokemonMosse
-                                      .map(
-                                        (mossa) => Text(
-                                          pokemonData
-                                              .capitalize(mossa)
-                                              .toString(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 17,
-                                          ),
-                                        ),
-                                      )
-                                      .toList()
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemonLista(
+                        width: width,
+                        pokemonListInfo: pokemonMosse,
+                        pokemonData: pokemonData,
+                        etichetta: 'Mosse: ',
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: const Text(
-                                'Esperienza Iniziale: ',
-                                style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                pokemonEsperienza.toString(),
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      InfoSchedaPokemon(
+                        width: width,
+                        etichetta: 'Esperienza Iniziale: ',
+                        descrizione: pokemonEsperienza.toString(),
                       ),
                     ],
                   ),
@@ -299,7 +156,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
             left: (width / 2) - 10,
             child: Image.network(
               pokemonImg,
-              height: 200,
+              height: width > 1200 ? 250 : 200,
               fit: BoxFit.cover,
             ),
           ),

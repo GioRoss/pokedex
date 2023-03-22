@@ -14,7 +14,7 @@ class Pokedex with ChangeNotifier {
     }
 
     final response = await http.get(
-      Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=1000'),
+      Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'),
     );
 
     print('RICHIESTA HTTP COMPLETATA');
@@ -142,7 +142,7 @@ class Pokedex with ChangeNotifier {
     return color;
   }
 
-  List<Widget> getPokemonType(List<dynamic> tipo) {
+  List<Widget> getPokemonType(List<dynamic> tipo, double width) {
     return tipo
         .map(
           (ele) => Container(
@@ -153,14 +153,20 @@ class Pokedex with ChangeNotifier {
             ),
             child: Text(
               capitalize(ele),
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                shadows: [
+                fontSize: width == 0
+                    ? 12
+                    : width > 1200 || (width < 400 && width > 270)
+                        ? 20
+                        : 17,
+                shadows: const [
                   BoxShadow(
-                      color: Colors.blueGrey,
-                      offset: Offset(0, 0),
-                      spreadRadius: 1.0,
-                      blurRadius: 15),
+                    color: Colors.blueGrey,
+                    offset: Offset(0, 0),
+                    spreadRadius: 1.0,
+                    blurRadius: 15,
+                  ),
                 ],
               ),
             ),

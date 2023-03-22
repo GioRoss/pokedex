@@ -19,6 +19,8 @@ class CardHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return InkWell(
       splashColor: colore1,
       borderRadius: BorderRadius.circular(15),
@@ -39,11 +41,14 @@ class CardHomePage extends StatelessWidget {
           children: [
             Text(
               testo.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: width > 1140 ? 30 : 17.5),
             ),
             Icon(
               icona,
               color: coloreIcona,
+              size: width > 1140 ? 50 : 26,
             ),
           ],
         ),
