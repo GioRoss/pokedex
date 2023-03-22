@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/screens/card_home_page.dart';
+import 'package:pokedex/widgets/card_home_page.dart';
 import 'package:pokedex/screens/list_pokemon_team.dart';
 
 import 'list_favorite_pokemon.dart';
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             colore1: Theme.of(context).colorScheme.secondary,
             colore2: Theme.of(context).colorScheme.secondary,
             rotta: ListaPokemonTeam.routeName,
-            testo: 'la mia squadra',
+            testo: 'squadra',
             icona: Icons.favorite,
             coloreIcona: Colors.red,
           ),

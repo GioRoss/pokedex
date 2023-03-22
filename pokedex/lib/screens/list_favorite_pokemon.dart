@@ -18,8 +18,6 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
   Widget build(BuildContext context) {
     final favoriti = Provider.of<Pokedex>(context);
     final List<Pokemon> listaFavoriti = favoriti.favoritePokemon;
-    final double scaleFactor = 1.0;
-    final width = MediaQuery.of(context).size.width * scaleFactor;
 
     return Scaffold(
       appBar: AppBar(
