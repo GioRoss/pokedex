@@ -89,18 +89,20 @@ class PokemonApp extends State<_PokemonApp> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: FlexibleSpaceBar(
-          background: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage('assets/images/pokemonLogo.png'),
-                fit: fitted(width),
+      appBar: _selectedPagesIndex == 0
+          ? AppBar(
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: const AssetImage('assets/images/pokemonLogo.png'),
+                      fit: fitted(width),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            )
+          : null,
       drawer: const Drawer(),
       body: _pages[_selectedPagesIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(

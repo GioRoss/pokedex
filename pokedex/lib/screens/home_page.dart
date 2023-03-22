@@ -15,48 +15,87 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: GridView(
-        padding: const EdgeInsets.all(8.0),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: width > 1700
-              ? 650
-              : width > 1590
-                  ? 550
-                  : width > 1140
-                      ? 500
-                      : width > 990
-                          ? 350
-                          : 300,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
-        children: <Widget>[
-          CardHomePage(
-              colore1: Theme.of(context).primaryColor,
-              colore2: Theme.of(context).primaryColor,
-              rotta: ListaPokemon.routeName,
-              testo: 'pokemon',
-              icona: Icons.abc),
-          CardHomePage(
-            colore1: Theme.of(context).colorScheme.secondary,
-            colore2: Theme.of(context).colorScheme.secondary,
-            rotta: ListaPokemonTeam.routeName,
-            testo: 'squadra',
-            icona: Icons.favorite,
-            coloreIcona: Colors.red,
-          ),
-          CardHomePage(
-            colore1: Theme.of(context).colorScheme.primary,
-            colore2: Theme.of(context).colorScheme.primary,
-            rotta: ListaPokemonFavoriti.routeName,
-            testo: 'preferiti',
-            icona: Icons.stars,
-          ),
-        ],
-      ),
-    );
+    return MediaQuery.of(context).orientation == Orientation.portrait
+        ? Container(
+            padding: const EdgeInsets.all(10),
+            child: GridView(
+              padding: const EdgeInsets.all(8.0),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: width > 1700
+                    ? 650
+                    : width > 1590
+                        ? 550
+                        : width > 1140
+                            ? 500
+                            : width > 990
+                                ? 350
+                                : 300,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              children: <Widget>[
+                CardHomePage(
+                    colore1: Theme.of(context).primaryColor,
+                    colore2: Theme.of(context).primaryColor,
+                    rotta: ListaPokemon.routeName,
+                    testo: 'pokemon',
+                    icona: Icons.abc),
+                CardHomePage(
+                  colore1: Theme.of(context).colorScheme.secondary,
+                  colore2: Theme.of(context).colorScheme.secondary,
+                  rotta: ListaPokemonTeam.routeName,
+                  testo: 'squadra',
+                  icona: Icons.favorite,
+                  coloreIcona: Colors.red,
+                ),
+                CardHomePage(
+                  colore1: Theme.of(context).colorScheme.primary,
+                  colore2: Theme.of(context).colorScheme.primary,
+                  rotta: ListaPokemonFavoriti.routeName,
+                  testo: 'preferiti',
+                  icona: Icons.stars,
+                ),
+              ],
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.all(10),
+            child: ListView(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: CardHomePage(
+                    colore1: Theme.of(context).primaryColor,
+                    colore2: Theme.of(context).primaryColor,
+                    rotta: ListaPokemon.routeName,
+                    testo: 'pokemon',
+                    icona: Icons.abc,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: CardHomePage(
+                    colore1: Theme.of(context).colorScheme.secondary,
+                    colore2: Theme.of(context).colorScheme.secondary,
+                    rotta: ListaPokemonTeam.routeName,
+                    testo: 'squadra',
+                    icona: Icons.favorite,
+                    coloreIcona: Colors.red,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: CardHomePage(
+                    colore1: Theme.of(context).colorScheme.primary,
+                    colore2: Theme.of(context).colorScheme.primary,
+                    rotta: ListaPokemonFavoriti.routeName,
+                    testo: 'preferiti',
+                    icona: Icons.stars,
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 }
