@@ -15,7 +15,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return MediaQuery.of(context).orientation == Orientation.portrait
+    return MediaQuery.of(context).orientation == Orientation.portrait ||
+            MediaQuery.of(context).platformBrightness == Brightness.light
         ? Container(
             padding: const EdgeInsets.all(10),
             child: GridView(
@@ -36,11 +37,12 @@ class _HomePageState extends State<HomePage> {
               ),
               children: <Widget>[
                 CardHomePage(
-                    colore1: Theme.of(context).primaryColor,
-                    colore2: Theme.of(context).primaryColor,
-                    rotta: ListaPokemon.routeName,
-                    testo: 'pokemon',
-                    icona: Icons.abc),
+                  colore1: Theme.of(context).primaryColor,
+                  colore2: Theme.of(context).primaryColor,
+                  rotta: ListaPokemon.routeName,
+                  testo: 'pokemon',
+                  immagine: '../../assets/images/123456.png',
+                ),
                 CardHomePage(
                   colore1: Theme.of(context).colorScheme.secondary,
                   colore2: Theme.of(context).colorScheme.secondary,
@@ -70,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     colore2: Theme.of(context).primaryColor,
                     rotta: ListaPokemon.routeName,
                     testo: 'pokemon',
-                    icona: Icons.abc,
+                    immagine: '../../assets/images/123456.png',
                   ),
                 ),
                 Container(

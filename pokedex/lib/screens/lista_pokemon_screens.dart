@@ -77,7 +77,7 @@ class ListaPokemonState extends State<ListaPokemon> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LISTA POKEMON'),
+        title: const Text('POKEDEX'),
       ),
       body: Column(
         children: [

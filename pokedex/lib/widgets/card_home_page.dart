@@ -5,7 +5,8 @@ class CardHomePage extends StatelessWidget {
   final Color colore2;
   final String rotta;
   final String testo;
-  final IconData icona;
+  final IconData? icona;
+  final String immagine;
   final Color? coloreIcona;
 
   const CardHomePage(
@@ -14,7 +15,8 @@ class CardHomePage extends StatelessWidget {
       required this.colore2,
       required this.rotta,
       required this.testo,
-      required this.icona,
+      this.icona,
+      this.immagine = "",
       this.coloreIcona});
 
   @override
@@ -42,14 +44,21 @@ class CardHomePage extends StatelessWidget {
             Text(
               testo.toUpperCase(),
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: width > 1140 ? 30 : 17.5),
+                fontWeight: FontWeight.bold,
+                fontSize: width > 1140 ? 29 : 17.5,
+              ),
             ),
-            Icon(
-              icona,
-              color: coloreIcona,
-              size: width > 1140 ? 50 : 26,
-            ),
+            immagine == ""
+                ? Icon(
+                    icona,
+                    color: coloreIcona,
+                    size: width > 1140 ? 45 : 30,
+                  )
+                : Image.asset(
+                    immagine,
+                    height: width > 1140 ? 34 : 25,
+                    width: width > 1140 ? 34 : 25,
+                  )
           ],
         ),
       ),

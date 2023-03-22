@@ -109,7 +109,7 @@ class PokemonApp extends State<_PokemonApp> {
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.black,
+        selectedItemColor: Colors.red,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedPagesIndex,
         items: const [
