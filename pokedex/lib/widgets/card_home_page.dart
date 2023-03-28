@@ -54,8 +54,8 @@ class CardHomePage extends StatelessWidget {
                     color: coloreIcona,
                     size: width > 1140 ? 45 : 30,
                   )
-                : Image.asset(
-                    immagine,
+                : Image(
+                    image: AssetImage(immagine),
                     height: width > 1140 ? 34 : 25,
                     width: width > 1140 ? 34 : 25,
                   )

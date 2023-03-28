@@ -59,6 +59,21 @@ class ListaPokemonState extends State<ListaPokemon> {
     }
   }
 
+  void toggleFavorite(Pokemon pokemon, Pokedex poke) {
+    if (!pokemon.isFavorite) {
+      scaffoldMessengerTeam(
+          'Aggiunto ${poke.capitalize(pokemon.nome)} ai Preferiti!!');
+    } else if (pokemon.isFavorite) {
+      scaffoldMessengerTeam(
+          'Rimosso ${poke.capitalize(pokemon.nome)} dai Preferiti!!');
+    } else {
+      scaffoldMessengerTeam(
+          '${poke.capitalize(pokemon.nome)} non è stato aggiunto!!');
+    }
+
+    poke.toggleFavoriteStatus(pokemon.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     double scaleFactor = 1.0;
@@ -125,8 +140,10 @@ class ListaPokemonState extends State<ListaPokemon> {
                             Positioned(
                               bottom: -5,
                               right: -10,
-                              child: Image.asset(
-                                '../../assets/images/pokeball.png',
+                              child: Image(
+                                image: AssetImage(
+                                  'images/pokeball.png',
+                                ),
                                 height: width > 1200 || width < 400 ? 150 : 100,
                                 fit: BoxFit.fitHeight,
                               ),
@@ -202,11 +219,8 @@ class ListaPokemonState extends State<ListaPokemon> {
                                           pokemon[index].tipo[0] != 'electric'
                                               ? Colors.amber
                                               : Colors.black),
-                                  onPressed: () {
-                                    poke.toggleFavoriteStatus(
-                                      pokemon[index].id,
-                                    );
-                                  },
+                                  onPressed: () =>
+                                      toggleFavorite(pokemon[index], poke),
                                 ),
                               ),
                             ),
@@ -223,9 +237,8 @@ class ListaPokemonState extends State<ListaPokemon> {
                                           pokemon[index].tipo[0] != 'electric'
                                               ? Colors.amber
                                               : Colors.black),
-                                  onPressed: () {
-                                    toggleTeam(pokemon[index], poke);
-                                  },
+                                  onPressed: () =>
+                                      toggleTeam(pokemon[index], poke),
                                 ),
                               ),
                             ),

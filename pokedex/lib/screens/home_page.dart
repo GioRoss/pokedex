@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                   colore2: Theme.of(context).primaryColor,
                   rotta: ListaPokemon.routeName,
                   testo: 'pokemon',
-                  immagine: '../../assets/images/123456.png',
+                  immagine: 'assets/images/123456.png',
                 ),
                 CardHomePage(
                   colore1: Theme.of(context).colorScheme.secondary,
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     colore2: Theme.of(context).primaryColor,
                     rotta: ListaPokemon.routeName,
                     testo: 'pokemon',
-                    immagine: '../../assets/images/123456.png',
+                    immagine: 'assets/images/123456.png',
                   ),
                 ),
                 Container(

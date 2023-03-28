@@ -1,14 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'pokemon.dart';
 
 class Pokedex with ChangeNotifier {
-  final List<Pokemon> _pokemonList = [];
+  List<Pokemon> _pokemonList = [];
   final List<Pokemon> pokemonMyTeam = [];
-  // bool loading = false;
+  final storage = FlutterSecureStorage();
 
   Future<void> fetchPokemon() async {
+    final datiSalvati = await storage.read(key: 'pokedex');
+
+    if (datiSalvati != null) {
+      _pokemonList = (jsonDecode(datiSalvati) as List<dynamic>)
+          .map((pokemonJson) => Pokemon.fromJson(pokemonJson))
+          .toList();
+      notifyListeners();
+      return;
+    }
+
     if (_pokemonList.isNotEmpty) {
       return;
     }
@@ -16,8 +27,6 @@ class Pokedex with ChangeNotifier {
     final response = await http.get(
       Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=25'),
     );
-
-    print('RICHIESTA HTTP COMPLETATA');
 
     try {
       final decodedJson = json.decode(response.body);
@@ -53,12 +62,16 @@ class Pokedex with ChangeNotifier {
         );
       }
 
+      await storage.write(
+        key: 'pokedex',
+        value: jsonEncode(_pokemonList),
+      );
+
+      print('dati da richiesta');
       notifyListeners();
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
-      // loading = false;
-      // notifyListeners();
     }
   }
 
@@ -74,23 +87,32 @@ class Pokedex with ChangeNotifier {
     return pokemonMyTeam.length;
   }
 
-  void toggleFavoriteStatus(int id) {
+  void toggleFavoriteStatus(int id) async {
     _pokemonList[id - 1].isFavorite = !_pokemonList[id - 1].isFavorite;
+    await storage.write(
+      key: 'pokedex',
+      value: jsonEncode(_pokemonList),
+    );
     notifyListeners();
   }
 
-  void toggleTeamStatus(int id) {
+  void toggleTeamStatus(int id) async {
     _pokemonList[id - 1].isTeam = !_pokemonList[id - 1].isTeam;
+    await storage.write(
+      key: 'pokedex',
+      value: jsonEncode(_pokemonList),
+    );
     notifyListeners();
   }
 
   void addPokemonTeam(int id) {
-    pokemonMyTeam.add(_pokemonList[id]);
+    pokemonMyTeam.add(_pokemonList[id - 1]);
     notifyListeners();
   }
 
   void removePokemonTeam(int id) {
-    pokemonMyTeam.remove(_pokemonList[id]);
+    pokemonMyTeam
+        .removeWhere((pokemon) => pokemon.id == _pokemonList[id - 1].id);
     notifyListeners();
   }
 

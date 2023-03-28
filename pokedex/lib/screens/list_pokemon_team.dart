@@ -57,7 +57,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
                   trailing: Container(
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('../../assets/images/pokeball.png'),
+                        image: AssetImage('images/pokeball.png'),
                       ),
                     ),
                     child: Image.network(
