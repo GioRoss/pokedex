@@ -83,7 +83,17 @@ class ListaPokemonState extends State<ListaPokemon> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('POKEDEX'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('POKEDEX'),
+            Image.asset(
+              '../../assets/images/pokedex.png',
+              height: 30,
+              width: 30,
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -105,8 +115,10 @@ class ListaPokemonState extends State<ListaPokemon> {
               itemCount: pokemon.length,
               itemBuilder: (ctx, index) {
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 5,
+                  ),
                   child: InkWell(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
@@ -181,7 +193,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                               top: 20,
                               left: 10,
                               child: Text(
-                                "#${pokemon[index].id} ${pokemonData.capitalize(pokemon[index].nome)}",
+                                "#0${pokemon[index].id} ${pokemonData.capitalize(pokemon[index].nome)}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: width > 1200 ||

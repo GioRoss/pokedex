@@ -16,73 +16,116 @@ class ListaPokemonTeam extends StatefulWidget {
 class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
   @override
   Widget build(BuildContext context) {
-    final favoriti = Provider.of<Pokedex>(context);
-    final List<Pokemon> listaFavoriti = favoriti.pokemonMyTeam;
+    final team = Provider.of<Pokedex>(context);
+    final teamFalse = Provider.of<Pokedex>(context, listen: false);
+    final List<Pokemon> listaTeam = team.teamPokemon;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista Squadra'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('TEAM'),
+            Image.asset(
+              '../../assets/images/pikachu.png',
+              height: 30,
+              width: 30,
+            ),
+          ],
+        ),
       ),
       body: ListView.builder(
-        itemCount: listaFavoriti.length,
+        itemCount: listaTeam.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 5,
-            ),
-            child: Card(
-              elevation: 5,
-              child: SizedBox(
-                height: 65,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: Colors.black,
-                      width: 0.5,
+          return Dismissible(
+            key: UniqueKey(),
+            direction: DismissDirection.endToStart,
+            confirmDismiss: (direction) {
+              return showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Sei Sicuro?'),
+                  content:
+                      const Text('Vuoi rimuovere il pokemon dalla squadra?'),
+                  actions: <Widget>[
+                    FloatingActionButton(
+                      child: const Text('NO'),
+                      onPressed: () => Navigator.of(ctx).pop(false),
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor:
-                      favoriti.getPokemonTypeColor(listaFavoriti[index].tipo),
-                  title: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
+                    FloatingActionButton(
+                      child: const Text('SI'),
+                      onPressed: () => Navigator.of(ctx).pop(true),
                     ),
-                    child: Text(
-                      '#0${listaFavoriti[index].id} ${favoriti.capitalize(listaFavoriti[index].nome)}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                  ],
+                ),
+              );
+            },
+            onDismissed: (direction) {
+              teamFalse.toggleTeamStatus(
+                listaTeam[index].id,
+              );
+              print('cambiato status');
+              teamFalse.removePokemonTeam(listaTeam[index].id);
+              print('rimosso');
+              print(teamFalse.teamPokemon);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+              ),
+              child: Card(
+                elevation: 5,
+                child: SizedBox(
+                  height: 65,
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        color: Colors.black,
+                        width: 0.5,
                       ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                  subtitle: Wrap(
-                    spacing: 5,
-                    children: <Widget>[
-                      ...favoriti.getPokemonType(listaFavoriti[index].tipo, 0),
-                    ],
-                  ),
-                  trailing: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'images/pokeball.png',
+                    tileColor: team.getPokemonTypeColor(listaTeam[index].tipo),
+                    title: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                      ),
+                      child: Text(
+                        '#0${listaTeam[index].id} ${team.capitalize(listaTeam[index].nome)}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    child: Image.network(
-                      listaFavoriti[index].imgIcona,
-                      height: 70,
-                      width: 70,
+                    subtitle: Wrap(
+                      spacing: 5,
+                      children: <Widget>[
+                        ...team.getPokemonType(listaTeam[index].tipo, 0),
+                      ],
                     ),
-                  ),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ChangeNotifierProvider.value(
-                          value: listaFavoriti[index],
-                          child: SchedaPokemon(),
-                        );
-                      },
+                    trailing: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'images/pokeball.png',
+                          ),
+                        ),
+                      ),
+                      child: Image.network(
+                        listaTeam[index].imgIcona,
+                        height: 70,
+                        width: 70,
+                      ),
+                    ),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ChangeNotifierProvider.value(
+                            value: listaTeam[index],
+                            child: SchedaPokemon(),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

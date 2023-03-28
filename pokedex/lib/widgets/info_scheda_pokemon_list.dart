@@ -25,7 +25,11 @@ class InfoSchedaPokemonLista extends StatelessWidget {
               etichetta,
               style: TextStyle(
                 color: Colors.blueGrey,
-                fontSize: width > 1200 ? 22 : 17,
+                fontSize: width > 1200
+                    ? 22
+                    : width < 310
+                        ? 13
+                        : 17,
               ),
             ),
           ),
@@ -39,7 +43,11 @@ class InfoSchedaPokemonLista extends StatelessWidget {
                         pokemonData.capitalize(abilita).toString(),
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: width > 1200 ? 22 : 17,
+                          fontSize: width > 1200
+                              ? 22
+                              : width < 310
+                                  ? 13
+                                  : 17,
                         ),
                       ),
                     )

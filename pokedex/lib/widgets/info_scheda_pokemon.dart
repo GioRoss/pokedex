@@ -23,7 +23,11 @@ class InfoSchedaPokemon extends StatelessWidget {
               etichetta,
               style: TextStyle(
                 color: Colors.blueGrey,
-                fontSize: width > 1200 ? 22 : 17,
+                fontSize: width > 1200
+                    ? 22
+                    : width < 310
+                        ? 13
+                        : 17,
               ),
             ),
           ),
@@ -32,7 +36,11 @@ class InfoSchedaPokemon extends StatelessWidget {
               descrizione,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: width > 1200 ? 22 : 17,
+                fontSize: width > 1200
+                    ? 22
+                    : width < 310
+                        ? 13
+                        : 17,
               ),
             ),
           ),

@@ -21,7 +21,17 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista Favoriti'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('FAVORITI'),
+            Image.asset(
+              '../../assets/images/123456.png',
+              height: 30,
+              width: 30,
+            ),
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: listaFavoriti.length,

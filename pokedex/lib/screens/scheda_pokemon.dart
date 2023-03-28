@@ -60,7 +60,11 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                   pokemonNome,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: width > 1200 ? 40 : 30,
+                    fontSize: width > 1200
+                        ? 40
+                        : width < 310
+                            ? 20
+                            : 30,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.left,
@@ -69,7 +73,11 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                   "#$pokemonId",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: width > 1200 ? 40 : 30,
+                    fontSize: width > 1200
+                        ? 40
+                        : width < 310
+                            ? 20
+                            : 30,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.left,
@@ -84,16 +92,21 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
               direction: Axis.vertical,
               spacing: 5,
               children: [
-                ...pokemonData.getPokemonType(pokemonTipo, width),
+                ...pokemonData.getPokemonType(
+                    pokemonTipo, width > 310 ? width : width / 3),
               ],
             ),
           ),
           Positioned(
-            top: height * 0.18,
+            bottom: (height / 2) + 10,
             right: -30,
             child: Image.asset(
               '../../assets/images/pokeball.png',
-              height: width > 1200 ? 250 : 200,
+              height: width > 1200
+                  ? 250
+                  : width < 400
+                      ? 150
+                      : 200,
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -155,10 +168,14 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
           ),
           Positioned(
             bottom: (height / 2) - 5,
-            left: (width / 2) - 10,
+            left: width < 350 ? width / 3 : (width / 2) - 10,
             child: Image.network(
               pokemonImg,
-              height: width > 1200 ? 250 : 200,
+              height: width > 1200
+                  ? 250
+                  : width < 450
+                      ? 150
+                      : 200,
               fit: BoxFit.cover,
             ),
           ),

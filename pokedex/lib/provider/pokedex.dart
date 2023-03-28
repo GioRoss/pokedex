@@ -6,7 +6,7 @@ import 'pokemon.dart';
 
 class Pokedex with ChangeNotifier {
   List<Pokemon> _pokemonList = [];
-  final List<Pokemon> pokemonMyTeam = [];
+  final List<Pokemon> _pokemonMyTeam = [];
   final storage = FlutterSecureStorage();
 
   Future<void> fetchPokemon() async {
@@ -61,7 +61,9 @@ class Pokedex with ChangeNotifier {
 
       await storage.write(
         key: 'pokedex',
-        value: jsonEncode(_pokemonList),
+        value: jsonEncode(
+          _pokemonList,
+        ),
       );
 
       print('dati da richiesta');
@@ -81,7 +83,13 @@ class Pokedex with ChangeNotifier {
   }
 
   int get pokemonTeamCount {
-    return pokemonMyTeam.length;
+    return _pokemonMyTeam.length;
+  }
+
+  List<Pokemon> get teamPokemon {
+    _pokemonMyTeam
+        .sort((pokemon1, pokemon2) => pokemon1.id.compareTo(pokemon2.id));
+    return _pokemonMyTeam;
   }
 
   void toggleFavoriteStatus(int id) async {
@@ -103,12 +111,12 @@ class Pokedex with ChangeNotifier {
   }
 
   void addPokemonTeam(int id) {
-    pokemonMyTeam.add(_pokemonList[id - 1]);
+    _pokemonMyTeam.add(_pokemonList[id - 1]);
     notifyListeners();
   }
 
   void removePokemonTeam(int id) {
-    pokemonMyTeam
+    _pokemonMyTeam
         .removeWhere((pokemon) => pokemon.id == _pokemonList[id - 1].id);
     notifyListeners();
   }
