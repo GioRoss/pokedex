@@ -6,8 +6,7 @@ class Pokemon with ChangeNotifier {
   final int id;
   final String imgProfilo;
   final String imgIcona;
-  final String imgIconaShiny;
-  final String imgProfiloShiny;
+
   final int esperienzaBase;
   final List<dynamic> abilita;
   final int altezza;
@@ -24,9 +23,7 @@ class Pokemon with ChangeNotifier {
     required this.id,
     required this.mosse,
     required this.imgIcona,
-    required this.imgIconaShiny,
     required this.imgProfilo,
-    required this.imgProfiloShiny,
     required this.tipo,
     required this.peso,
     required this.isFavorite,
@@ -41,9 +38,7 @@ class Pokemon with ChangeNotifier {
         id = json['id'],
         mosse = json['mosse'],
         imgIcona = json['immagineIcona'],
-        imgIconaShiny = json['immagineIconaShiny'],
         imgProfilo = json['immagineProfilo'],
-        imgProfiloShiny = json['immagineProfiloShiny'],
         tipo = json['tipo'],
         peso = json['peso'],
         isFavorite = json['favorito'],
@@ -58,9 +53,7 @@ class Pokemon with ChangeNotifier {
       'id': id,
       'mosse': mosse,
       'immagineIcona': imgIcona,
-      'immagineIconaShiny': imgIconaShiny,
       'immagineProfilo': imgProfilo,
-      'immagineProfiloShiny': imgProfiloShiny,
       'tipo': tipo,
       'peso': peso,
       'favorito': isFavorite,

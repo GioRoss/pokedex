@@ -59,9 +59,10 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
                 Text(
                   pokemonNome,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: width > 1200 ? 40 : 30,
-                      fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: width > 1200 ? 40 : 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 Text(

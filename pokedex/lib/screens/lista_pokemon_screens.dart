@@ -76,17 +76,10 @@ class ListaPokemonState extends State<ListaPokemon> {
 
   @override
   Widget build(BuildContext context) {
-    double scaleFactor = 1.0;
-    final width = MediaQuery.of(context).size.width * scaleFactor;
-    // final height = MediaQuery.of(context).size.height * scaleFactor;
-    final orientation = MediaQuery.of(context).orientation;
+    final width = MediaQuery.of(context).size.width;
 
     final pokemonData = Provider.of<Pokedex>(context);
     final pokemon = pokemonData.pokemonList;
-
-    if (orientation == Orientation.landscape) {
-      scaleFactor = 0.5;
-    }
 
     return Scaffold(
       appBar: AppBar(

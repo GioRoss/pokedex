@@ -49,11 +49,8 @@ class Pokedex with ChangeNotifier {
                 .take(5)
                 .toList(),
             imgIcona: pokemonJson['sprites']['front_default'],
-            imgIconaShiny: pokemonJson['sprites']['front_shiny'],
             imgProfilo: pokemonJson['sprites']['other']['home']
                 ['front_default'],
-            imgProfiloShiny: pokemonJson['sprites']['other']['home']
-                ['front_shiny'],
             tipo: pokemonJson['types'].map((e) => e['type']['name']).toList(),
             peso: pokemonJson['weight'],
             isFavorite: false,
@@ -168,7 +165,10 @@ class Pokedex with ChangeNotifier {
     return tipo
         .map(
           (ele) => Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 5,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               color: Colors.black.withOpacity(0.5),

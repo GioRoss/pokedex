@@ -58,7 +58,7 @@ class CardHomePage extends StatelessWidget {
                     image: AssetImage(immagine),
                     height: width > 1140 ? 34 : 25,
                     width: width > 1140 ? 34 : 25,
-                  )
+                  ),
           ],
         ),
       ),

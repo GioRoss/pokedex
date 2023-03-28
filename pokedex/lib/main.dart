@@ -103,7 +103,7 @@ class PokemonApp extends State<_PokemonApp> {
               ),
             )
           : null,
-      drawer: const Drawer(),
+      // drawer: const Drawer(),
       body: _pages[_selectedPagesIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -112,7 +112,7 @@ class PokemonApp extends State<_PokemonApp> {
         selectedItemColor: Colors.red,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedPagesIndex,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
@@ -120,8 +120,10 @@ class PokemonApp extends State<_PokemonApp> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.abc,
+            icon: Image.asset(
+              'assets/images/123456.png',
+              height: 22,
+              width: 22,
             ),
             label: 'Pokedex',
           ),

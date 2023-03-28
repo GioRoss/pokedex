@@ -18,8 +18,6 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
   Widget build(BuildContext context) {
     final favoriti = Provider.of<Pokedex>(context);
     final List<Pokemon> listaFavoriti = favoriti.pokemonMyTeam;
-    double scaleFactor = 1.0;
-    final width = MediaQuery.of(context).size.width * scaleFactor;
 
     return Scaffold(
       appBar: AppBar(
@@ -29,23 +27,32 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
         itemCount: listaFavoriti.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+            ),
             child: Card(
               elevation: 5,
               child: SizedBox(
                 height: 65,
                 child: ListTile(
                   shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.black, width: 0.5),
+                    side: const BorderSide(
+                      color: Colors.black,
+                      width: 0.5,
+                    ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   tileColor:
                       favoriti.getPokemonTypeColor(listaFavoriti[index].tipo),
                   title: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                    ),
                     child: Text(
                       '#0${listaFavoriti[index].id} ${favoriti.capitalize(listaFavoriti[index].nome)}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   subtitle: Wrap(
@@ -57,7 +64,9 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
                   trailing: Container(
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('images/pokeball.png'),
+                        image: AssetImage(
+                          'images/pokeball.png',
+                        ),
                       ),
                     ),
                     child: Image.network(

@@ -34,7 +34,8 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
                 context: context,
                 builder: (ctx) => AlertDialog(
                   title: const Text('Sei Sicuro?'),
-                  content: const Text('Vuoi rimuovere il pokemon dai prefeti?'),
+                  content:
+                      const Text('Vuoi rimuovere il pokemon dai preferiti?'),
                   actions: <Widget>[
                     FloatingActionButton(
                       child: const Text('NO'),
