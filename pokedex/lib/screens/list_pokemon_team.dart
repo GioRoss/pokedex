@@ -27,7 +27,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
           children: <Widget>[
             const Text('TEAM'),
             Image.asset(
-              '../../assets/images/pikachu.png',
+              '../../assets/images/123456.png',
               height: 30,
               width: 30,
             ),
@@ -64,10 +64,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
               teamFalse.toggleTeamStatus(
                 listaTeam[index].id,
               );
-              print('cambiato status');
               teamFalse.removePokemonTeam(listaTeam[index].id);
-              print('rimosso');
-              print(teamFalse.teamPokemon);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(

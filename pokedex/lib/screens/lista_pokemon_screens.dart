@@ -203,10 +203,11 @@ class ListaPokemonState extends State<ListaPokemon> {
                                   color: Colors.white,
                                   shadows: const [
                                     BoxShadow(
-                                        color: Colors.blueGrey,
-                                        offset: Offset(0, 0),
-                                        spreadRadius: 1.0,
-                                        blurRadius: 15),
+                                      color: Colors.blueGrey,
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 1.0,
+                                      blurRadius: 15,
+                                    ),
                                   ],
                                 ),
                               ),

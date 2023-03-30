@@ -26,7 +26,7 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
           children: <Widget>[
             const Text('FAVORITI'),
             Image.asset(
-              '../../assets/images/123456.png',
+              '../../assets/images/pikachu.png',
               height: 30,
               width: 30,
             ),
