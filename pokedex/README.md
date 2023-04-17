@@ -32,27 +32,27 @@ Qui di seguito vengono riportati diversi screenshot dell'applicazione avviata tr
 
 HOME PAGE
 
-## <img src="pokedex/pokedex/assets/images/home_page" width="200" alt="HomePage"></img>
+## <img src="pokedex/pokedex/assets/images/home_page.png" width="200" alt="HomePage"></img>
 
 LISTA POKEDEX
 
-## <img src="pokedex/pokedex/assets/images/lista_pokedex" width="200" alt="Pokedex"></img>
+## <img src="pokedex/pokedex/assets/images/lista_pokedex.png" width="200" alt="Pokedex"></img>
 
 SCHEDA POKEMON
 
-## <img src="pokedex/pokedex/assets/images/dettagli_pokemon" width="200" alt="SchermataPokemon"></img>
+## <img src="pokedex/pokedex/assets/images/dettagli_pokemon.png" width="200" alt="SchermataPokemon"></img>
 
 LISTA POKEMON PREFERITI
 
-## <img src="pokedex/pokedex/assets/images/lista_pokemon_preferiti" width="200" alt="ListaPokemonPreferiti"></img>
+## <img src="pokedex/pokedex/assets/images/lista_pokemon_preferiti.png" width="200" alt="ListaPokemonPreferiti"></img>
 
 LISTA POKEMON SQUADRA
 
-## <img src="pokedex/pokedex/assets/images/lista_pokemon_team" width="200" alt="ListaPokemonTeam"></img>
+## <img src="pokedex/pokedex/assets/images/lista_pokemon_team.png" width="200" alt="ListaPokemonTeam"></img>
 
 RIMOZIONE POKEMON DALLA LISTA PREFERITI O SQUADRA
 
-## <img src="pokedex/pokedex/assets/images/conferma_rimozione_pokemon" width="200" alt="ListaPokemonPreferiti"></img>
+## <img src="pokedex/pokedex/assets/images/conferma_rimozione_pokemon.png" width="200" alt="ListaPokemonPreferiti"></img>
 
 # STRUMENTI UTILIZZATI
 
