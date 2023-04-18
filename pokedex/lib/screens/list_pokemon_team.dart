@@ -27,7 +27,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
           children: <Widget>[
             const Text('TEAM'),
             Image.asset(
-              '../../assets/images/123456.png',
+              'assets/images/123456.png',
               height: 30,
               width: 30,
             ),
@@ -104,7 +104,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                            'images/pokeball.png',
+                            'assets/images/pokeball.png',
                           ),
                         ),
                       ),

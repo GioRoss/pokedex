@@ -102,7 +102,7 @@ class _SchedaPokemonState extends State<SchedaPokemon> {
               bottom: (height / 2) + 10,
               right: -30,
               child: Image.asset(
-                '../../assets/images/pokeball.png',
+                'assets/images/pokeball.png',
                 height: width > 1200
                     ? 250
                     : width < 400
