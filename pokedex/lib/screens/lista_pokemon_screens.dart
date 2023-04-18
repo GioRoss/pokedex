@@ -88,7 +88,7 @@ class ListaPokemonState extends State<ListaPokemon> {
           children: <Widget>[
             const Text('POKEDEX'),
             Image.asset(
-              '../../assets/images/pokedex.png',
+              'assets/images/pokedex.png',
               height: 30,
               width: 30,
             ),
@@ -147,7 +147,7 @@ class ListaPokemonState extends State<ListaPokemon> {
                               right: -10,
                               child: Image(
                                 image: AssetImage(
-                                  'images/pokeball.png',
+                                  'assets/images/pokeball.png',
                                 ),
                                 height: width > 1200 || width < 400 ? 150 : 100,
                                 fit: BoxFit.fitHeight,

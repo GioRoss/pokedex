@@ -26,7 +26,7 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
           children: <Widget>[
             const Text('FAVORITI'),
             Image.asset(
-              '../../assets/images/pikachu.png',
+              'assets/images/pikachu.png',
               height: 30,
               width: 30,
             ),
@@ -105,7 +105,7 @@ class _ListaPokemonFavoritiState extends State<ListaPokemonFavoriti> {
                     trailing: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('../../assets/images/pokeball.png'),
+                          image: AssetImage('assets/images/pokeball.png'),
                         ),
                       ),
                       child: Image.network(
