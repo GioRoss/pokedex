@@ -46,7 +46,7 @@ class _ListaPokemonTeamState extends State<ListaPokemonTeam> {
                 builder: (ctx) => AlertDialog(
                   title: const Text('Sei Sicuro?'),
                   content:
-                      const Text('Vuoi rimuovere il pokemon dalla squadra?'),
+                      const Text('Vuoi rimuovere il pokémon dalla squadra?'),
                   actions: <Widget>[
                     FloatingActionButton(
                       child: const Text('NO'),
